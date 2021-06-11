@@ -1,23 +1,39 @@
 import logo from './logo.svg';
 import './App.css';
+import TodoItems from './components/TodoItems';
+import Todo from './components/Todo';
+import NewTodo from './components/Form/NewTodo';
+import React from 'react';
+const arr=[{
+  date:new Date(2020,5,25),
+  title:"car Assurence",
+  price:2.25,
+},
+{
+  date:new Date(2021,6,20),
+  title:"bike Assurence",
+  price:20.5,
+},
+{
+  date:new Date(2020,5,25),
+  title:"medical",
+  price:12.5,
+},
+]
+function App() { 
+  
+const [items,setItems]=React.useState(arr);
 
-function App() {
+const addItemHandler = (item) => {
+  setItems(prevItem => {
+    return [item,...prevItem];
+  })
+}
   return (
+    
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NewTodo onAddItem={addItemHandler}/>
+      <Todo items={items}/>
     </div>
   );
 }
